@@ -1,0 +1,6 @@
+[submodule "libs/pugixml"]
+	path = libs/pugixml
+	url = https://github.com/zeux/pugixml.git
+[submodule "libs/zip"]
+	path = libs/zip
+	url = https://github.com/kuba--/zip.git
