@@ -4,7 +4,7 @@
 ## Beta version! You can use at your own risk.
 
 ## Sample
-<p align="center"><img src="https://github.com/GGsrvg/WordKit/blob/master/resForReadme/template.png" width="380"></p>
+<p align="center"><img src="https://github.com/GGsrvg/WordKit/blob/master/resForReadme/template.png" width="880"></p>
 
 ## TODO:
 - [ ] Check working on Windows
