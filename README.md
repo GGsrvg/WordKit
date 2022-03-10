@@ -9,13 +9,14 @@
 - [x] Check working on MacOS
 - [x] Check working on Android
 - [ ] Check working on iOS
+- [ ] Using smart pointers instead of standard ones
 - [ ] Add support fonts
 - [ ] Add support image
 
 ## Install
 ```bash
-git clone git@github.com:GGsrvg/actGenerator.git
-cd actGenerator/
+git clone https://github.com/GGsrvg/WordKit.git
+cd WordKit/
 mkdir build && cd build
 cmake ..
 cmake --build .

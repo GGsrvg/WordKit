@@ -1,6 +1,5 @@
 //
 //  Run.h
-//  actGenerator
 //
 //  Created by GGsrvg on 02.12.2021.
 //
@@ -19,7 +18,7 @@ class Text: Encodable {
 public:
     Text(std::string);
     ~Text();
-    std::string encode();
+    std::string encode() noexcept override;
 private:
     std::string text;
 };
@@ -30,7 +29,7 @@ public:
     }
     ~Break() {}
     
-    std::string encode() {
+    std::string encode() noexcept {
         return "<w:br/>";
     }
 };
@@ -64,14 +63,14 @@ public:
     RunProperty();
     ~RunProperty();
     
-    std::string encode() override;
+    std::string encode() noexcept override;
 };
 
 class Run: Encodable {
 public:
     Run(RunProperty*, const std::vector<Text*>);
     ~Run();
-    std::string encode() override;
+    std::string encode() noexcept override;
 private:
     RunProperty* property;
     std::vector<Text*> texts;

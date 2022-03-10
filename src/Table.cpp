@@ -1,6 +1,5 @@
 //
 //  Table.cpp
-//  actGenerator
 //
 //  Created by GGsrvg on 12.12.2021.
 //
@@ -11,7 +10,7 @@ wordKit::TableProperty::TableProperty() {
     
 }
 
-std::string wordKit::TableProperty::encode() {
+std::string wordKit::TableProperty::encode() noexcept {
     std::string content = "";
     
     content += HAlignmentEncode(this->horizontalAlignment);
@@ -60,7 +59,7 @@ wordKit::TableGrid::TableGrid(std::vector<int> _widths) : widths(_widths) {
 
 }
 
-std::string wordKit::TableGrid::encode() {
+std::string wordKit::TableGrid::encode() noexcept {
     std::string content = "";
 
     for(auto width: this->widths) {
@@ -76,7 +75,7 @@ wordKit::TableCellProperty::TableCellProperty() {
     
 }
 
-std::string wordKit::TableCellProperty::encode() {
+std::string wordKit::TableCellProperty::encode() noexcept {
     std::string content = "";
     
     if(this->width > 0) {
@@ -134,7 +133,7 @@ wordKit::TableCell::~TableCell(){
     delete paragraph;
 }
 
-std::string wordKit::TableCell::encode() {
+std::string wordKit::TableCell::encode() noexcept {
     std::string content = "";
     
     content += this->property->encode();
@@ -161,7 +160,7 @@ wordKit::TableRowProperty::TableRowProperty() {
     
 }
 
-std::string wordKit::TableRowProperty::encode() {
+std::string wordKit::TableRowProperty::encode() noexcept {
     std::string content = "";
     
     {
@@ -189,7 +188,7 @@ wordKit::TableRow::~TableRow(){
     cells.clear();
 }
 
-std::string wordKit::TableRow::encode() {
+std::string wordKit::TableRow::encode() noexcept {
     std::string content = "";
     
     content += this->property->encode();
@@ -219,7 +218,7 @@ wordKit::Table::~Table(){
     rows.clear();
 }
 
-std::string wordKit::Table::encode() {
+std::string wordKit::Table::encode() noexcept {
     std::string content = "";
     
     content += this->property->encode();

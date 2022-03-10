@@ -6,7 +6,7 @@ using namespace wordKit;
 
 int main() {
     const auto fileName = "test.docx";
-    std::shared_ptr<wordKit::Document> document(new wordKit::Document(fileName));
+    std::shared_ptr<wordKit::Document> document(new wordKit::Document("", fileName));
     
     document->appendElements({
         new Paragraph(dsl([]() {
@@ -39,6 +39,8 @@ int main() {
             })
         })
     });
-    
+
+    document->save();
+
     return 0;
 }

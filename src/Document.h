@@ -1,16 +1,15 @@
 //
 //  Document.h
-//  actGenerator
 //
 //  Created by GGsrvg on 02.12.2021.
 //
 
 #ifndef Document_h
 #define Document_h
-// standarts
+// standards
 #include <iostream>
 #include <cstdio>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -24,58 +23,59 @@
 #include "Paragraph.h"
 #include "Run.h"
 #include "Table.h"
+#include "SectionProperty.h"
 
 namespace wordKit {
-class SectionProperty: public Encodable {
-public:
-    int width = 11907;
-    int height = 16839;
-    bool isVertical = true;
-    
-    int marginLeft = 1134;
-    int marginTop = 1134;
-    int marginRight = 1134;
-    int marginBottom = 1134;
-    int marginHeader = 0;
-    int marginFooter = 0;
-    int marginGutter = 0;
-    
-    SectionProperty();
-    std::string encode();
-};
-
+/**
+ * Document
+ *
+ * Have 2
+ */
 class Document {
 public:
     
-    SectionProperty* property = new SectionProperty();
-    
+    std::shared_ptr<SectionProperty> property;
+
     /**
-     Create new document by name in memory.
-     
+     Create new document by name.
+
      - Parameters:
         - path: where create file.
-        - fileName: file name.
+        - name: file name after save.
+        - sectionProperty:
+
+    - Sample:
+        path="/Documents" and name="act_01.01.2021"
+        the document is saved in the "Documents" folder with the name "act_01.01.2021"
      */
-    Document(std::string path);
+    explicit Document(const std::string& path, const std::string& name, std::shared_ptr<SectionProperty> sectionProperty);
+
+    /**
+     Create new document by name.
+
+     - Parameters:
+        - path: where create file.
+        - name: file name after save.
+     */
+    explicit Document(const std::string& path, const std::string& name);
     
     ~Document();
     
     /**
      Remove all elements from body
      */
-    void removeAllElements();
+    void removeAllElements() noexcept;
     
     /**
      Append new elements to body
      */
-    void appendElements(std::vector<Element*> elements);
+    void appendElements(std::vector<Element*> elements) noexcept;
     
     /**
      Save on disk
      */
-    void save() throw();
+    void save();
 private:
-    // is also file name
     struct zip_t *zip;
     std::string name;
     std::vector<Element*> elements;

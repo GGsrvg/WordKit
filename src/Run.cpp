@@ -1,6 +1,5 @@
 //
 //  Run.cpp
-//  actGenerator
 //
 //  Created by GGsrvg on 05.12.2021.
 //
@@ -14,7 +13,7 @@ wordKit::Text::Text(std::string text): text(text) {
 wordKit::Text::~Text() {
 }
 
-std::string wordKit::Text::encode() {
+std::string wordKit::Text::encode() noexcept {
     const std::string openKey = "<w:t>";
     const std::string closeKey = "</w:t>";
     return openKey + this->text + closeKey;
@@ -28,7 +27,7 @@ wordKit::RunProperty::~RunProperty() {
     
 }
 
-std::string wordKit::RunProperty::encode() {
+std::string wordKit::RunProperty::encode() noexcept {
     std::string content = "";
     
     if(!font.empty()) {
@@ -80,7 +79,7 @@ wordKit::Run::~Run() {
     texts.clear();
 }
 
-std::string wordKit::Run::encode() {
+std::string wordKit::Run::encode() noexcept {
     std::string content = "";
     
     for(auto text : texts) {

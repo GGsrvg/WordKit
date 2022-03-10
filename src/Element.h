@@ -1,6 +1,5 @@
 //
 //  Element.h
-//  actGenerator
 //
 //  Created by GGsrvg on 02.12.2021.
 //
@@ -58,22 +57,20 @@ std::string VAlignmentEncode(VAlignment verticalAlignment);
 std::string HAlignmentEncode(HAlignment horizontalAlignment);
 
 /**
- Every object intherits from Encodable
+ Every object inherits from Encodable
  */
 class Encodable {
 public:
-    virtual std::string encode() {
+    virtual std::string encode() noexcept {
         return "ERROR";
     }
-    virtual ~Encodable() {
-        
-    }
+    virtual ~Encodable() = default;
 };
 
 class Element: public Encodable {
 public:
-    Element() { }
-    virtual ~Element() { }
+    Element() = default;
+    ~Element() override = default;
 };
 }
 

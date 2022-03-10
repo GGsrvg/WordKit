@@ -1,6 +1,5 @@
 //
 //  Paragraph.cpp
-//  actGenerator
 //
 //  Created by GGsrvg on 05.12.2021.
 //
@@ -11,7 +10,7 @@ wordKit::ParagraphProperty::ParagraphProperty() { }
 
 wordKit::ParagraphProperty::~ParagraphProperty() { }
 
-std::string wordKit::ParagraphProperty::encode() {
+std::string wordKit::ParagraphProperty::encode() noexcept {
     std::string content = "";
     
     content += HAlignmentEncode(this->horizontalTextAligmment);
@@ -33,7 +32,7 @@ wordKit::Paragraph::~Paragraph() {
     runs.clear();
 }
 
-std::string wordKit::Paragraph::encode() {
+std::string wordKit::Paragraph::encode() noexcept {
     std::string content = "";
     
     for (auto run : runs) {

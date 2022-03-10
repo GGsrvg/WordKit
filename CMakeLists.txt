@@ -9,7 +9,8 @@ set(SOURCES src/Document.cpp
             src/Element.cpp
             src/Paragraph.cpp
             src/Run.cpp
-            src/Table.cpp)
+            src/Table.cpp
+        src/SectionProperty.cpp src/SectionProperty.h)
 # set library headers
 file(GLOB HEADERS src/*.h
                   src/*.hpp)

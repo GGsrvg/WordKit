@@ -1,6 +1,5 @@
 //
 //  Table.hpp
-//  actGenerator
 //
 //  Created by GGsrvg on 12.12.2021.
 //
@@ -26,7 +25,7 @@ public:
     int borderSize = 0;
     std::string borderColor = "000000";
     
-    std::string caption = "";
+    std::string caption;
     
     /**
      Specifies the method of laying out the contents of the table.
@@ -47,15 +46,15 @@ public:
     
     TableProperty();
     
-    std::string encode() override;
+    std::string encode() noexcept override;
 };
 
 class TableGrid: Encodable {
 public:
     std::vector<int> widths;
 
-    TableGrid(std::vector<int>);
-    std::string encode() override;
+    explicit TableGrid(std::vector<int>);
+    std::string encode() noexcept override;
 };
 
 class TableCellProperty: Encodable {
@@ -70,7 +69,7 @@ public:
     VAlignment vAlignment = VAlignment::VACenter;
     
     // when is empty do not set color
-    std::string color = "";
+    std::string color;
     
     int marginTop = 0;
     int marginStart = 0;
@@ -78,14 +77,14 @@ public:
     int marginBottom = 0;
     
     TableCellProperty();
-    std::string encode() override;
+    std::string encode() noexcept override;
 };
 
 class TableCell: Encodable {
 public:
     TableCell(TableCellProperty*, Paragraph*);
-    ~TableCell();
-    std::string encode() override;
+    ~TableCell() override;
+    std::string encode() noexcept override;
     
 private:
     TableCellProperty* property;
@@ -110,14 +109,14 @@ public:
     int height = 0;
     
     TableRowProperty();
-    std::string encode() override;
+    std::string encode() noexcept override;
 };
 
 class TableRow: Encodable {
 public:
     TableRow(TableRowProperty*, std::vector<TableCell*>);
-    ~TableRow();
-    std::string encode() override;
+    ~TableRow() override;
+    std::string encode() noexcept override;
 private:
     TableRowProperty* property;
     std::vector<TableCell*> cells;
@@ -126,8 +125,8 @@ private:
 class Table: public Element {
 public:
     Table(TableProperty*, TableGrid*, std::vector<TableRow*>);
-    ~Table();
-    std::string encode() override;
+    ~Table() override;
+    std::string encode() noexcept override;
 private:
     TableProperty* property;
     TableGrid* grid;

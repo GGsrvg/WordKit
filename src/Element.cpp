@@ -1,6 +1,5 @@
 //
 //  Element.cpp
-//  actGenerator
 //
 //  Created by GGsrvg on 25.12.2021.
 //

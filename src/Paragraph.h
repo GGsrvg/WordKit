@@ -1,6 +1,5 @@
 //
 //  Paragraph.h
-//  actGenerator
 //
 //  Created by GGsrvg on 02.12.2021.
 //
@@ -21,16 +20,16 @@ public:
     HAlignment horizontalTextAligmment = HAStart;
     
     ParagraphProperty();
-    ~ParagraphProperty();
+    ~ParagraphProperty() override;
     
-    std::string encode() override;
+    std::string encode() noexcept override;
 };
 
 class Paragraph: public Element {
 public:
     Paragraph(ParagraphProperty*, std::vector<Run*>);
     ~Paragraph();
-    std::string encode() override;
+    std::string encode() noexcept override;
 private:
     ParagraphProperty* property;
     std::vector<Run*> runs;
