@@ -38,7 +38,7 @@ std::string wordKit::TableProperty::encode() noexcept {
     {
         std::string layout;
         
-        if(this->isFixedLayut) {
+        if(this->isFixedLayout) {
             layout = "fixed";
         } else {
             layout = "autofit";
@@ -104,7 +104,7 @@ std::string wordKit::TableCellProperty::encode() noexcept {
     content += "<w:vAlign w:val=\"" + wordKit::VAlignmentEncode(this->vAlignment) + "\"/>";
     
     if(!this->color.empty()) {
-        content += "<w:shd w:val=\"clear\" w:color=\"auto\" w:fill=\"" + this->color + "\"/>";
+        content += R"(<w:shd w:val="clear" w:color="auto" w:fill=")" + this->color + "\"/>";
     }
     
     {
@@ -112,7 +112,7 @@ std::string wordKit::TableCellProperty::encode() noexcept {
         "<w:top w:w=\"" + std::to_string(this->marginTop) + "\" w:type=\"dxa\"/> \
         <w:start w:w=\"" + std::to_string(this->marginStart) + "\" w:type=\"dxa\"/> \
         <w:end w:w=\"" + std::to_string(this->marginEnd) + "\" w:type=\"dxa\"/> \
-        <w:bottom w:w=\"" + std::to_string(this->marginBottom) + "\" w:type=\"dxa\"/>";
+        <w:bottom w:w=\"" + std::to_string(this->marginBottom) + R"(" w:type="dxa"/>)";
         
         const std::string marginOpenKey = "<w:tcMar>";
         const std::string marginCloseKey = "</w:tcMar>";
@@ -124,17 +124,14 @@ std::string wordKit::TableCellProperty::encode() noexcept {
     return openKey + content + closeKey;
 }
 
-wordKit::TableCell::TableCell(TableCellProperty* _property, Paragraph* _paragraph): property(_property), paragraph(_paragraph) {
+wordKit::TableCell::TableCell(std::shared_ptr<TableCellProperty> _property, std::shared_ptr<Paragraph> _paragraph): property(std::move(_property)), paragraph(std::move(_paragraph)) {
     
 }
 
-wordKit::TableCell::~TableCell(){
-    delete property;
-    delete paragraph;
-}
+wordKit::TableCell::~TableCell() = default;
 
 std::string wordKit::TableCell::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
     content += this->property->encode();
     
@@ -156,12 +153,10 @@ std::string wordKit::TableRowHeightRuleEncode(wordKit::TableRowHeightRule tableR
     }
 }
 
-wordKit::TableRowProperty::TableRowProperty() {
-    
-}
+wordKit::TableRowProperty::TableRowProperty() = default;
 
 std::string wordKit::TableRowProperty::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
     {
         auto ruleStr = TableRowHeightRuleEncode(this->heightRule);
@@ -175,25 +170,18 @@ std::string wordKit::TableRowProperty::encode() noexcept {
     return openKey + content + closeKey;
 }
 
-wordKit::TableRow::TableRow(TableRowProperty* _property, std::vector<TableCell*> _cells): property(_property), cells(_cells) {
+wordKit::TableRow::TableRow(std::shared_ptr<TableRowProperty> _property, std::vector<std::shared_ptr<TableCell>> _cells): property(std::move(_property)), cells(std::move(_cells)) {
     
 }
 
-wordKit::TableRow::~TableRow(){
-    delete property;
-    
-    for(auto cell : cells)
-        delete cell;
-    
-    cells.clear();
-}
+wordKit::TableRow::~TableRow() = default;
 
 std::string wordKit::TableRow::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
     content += this->property->encode();
     
-    for (auto cell : cells) {
+    for (const auto& cell : cells) {
         content += cell->encode();
     }
     
@@ -203,23 +191,15 @@ std::string wordKit::TableRow::encode() noexcept {
 }
 
 
-wordKit::Table::Table(TableProperty* _property, TableGrid* _grid, std::vector<TableRow*> _rows):
-property(_property), grid(_grid), rows(_rows) {
+wordKit::Table::Table(std::shared_ptr<TableProperty> _property, std::shared_ptr<TableGrid> _grid, std::vector<std::shared_ptr<TableRow>> _rows):
+property(std::move(_property)), grid(std::move(_grid)), rows(std::move(_rows)) {
     
 }
 
-wordKit::Table::~Table(){
-    delete property;
-    delete grid;
-    
-    for(auto row : rows)
-        delete row;
-    
-    rows.clear();
-}
+wordKit::Table::~Table() = default;
 
 std::string wordKit::Table::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
     content += this->property->encode();
     content += this->grid->encode();

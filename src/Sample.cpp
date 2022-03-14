@@ -1,21 +1,21 @@
-#include <iostream>
+#include <memory>
 #include "Document.h"
 
 using namespace std;
 using namespace wordKit;
 
-int main() {
+void generateDocument() {
     const auto fileName = "test.docx";
     std::shared_ptr<wordKit::Document> document(new wordKit::Document("", fileName));
-    
+
     document->appendElements({
         new Paragraph(dsl([]() {
-            auto property = new ParagraphProperty();
-            property->horizontalTextAligmment = HACenter;
+            auto property = make_shared<ParagraphProperty>();
+            property->horizontalTextAlignment = HACenter;
             return property;
         }), {
             new Run(dsl([]() {
-                auto property = new RunProperty();
+                auto property = make_shared<RunProperty>();
                 property->size = 10;
                 property->isBold = true;
                 property->isCAPS = true;
@@ -26,7 +26,7 @@ int main() {
                 new Text("Official document")
             }),
             new Run(dsl([]() {
-                auto property = new RunProperty();
+                auto property = make_shared<RunProperty>();
                 property->size = 10;
                 property->isBold = true;
                 return property;
@@ -38,9 +38,12 @@ int main() {
                 new Break(),
             })
         })
-    });
+     });
 
     document->save();
+}
 
+int main() {
+    generateDocument();
     return 0;
 }

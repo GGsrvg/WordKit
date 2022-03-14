@@ -17,7 +17,7 @@ namespace wordKit {
 class ParagraphProperty: Encodable {
 public:
     VAlignment verticalTextAlignment = VAAuto;
-    HAlignment horizontalTextAligmment = HAStart;
+    HAlignment horizontalTextAlignment = HAStart;
     
     ParagraphProperty();
     ~ParagraphProperty() override;
@@ -27,12 +27,13 @@ public:
 
 class Paragraph: public Element {
 public:
-    Paragraph(ParagraphProperty*, std::vector<Run*>);
-    ~Paragraph();
+    Paragraph(std::shared_ptr<ParagraphProperty>, std::vector<std::shared_ptr<Run>>);
+    Paragraph(std::shared_ptr<ParagraphProperty>, const std::vector<Run*>&);
+    ~Paragraph() override;
     std::string encode() noexcept override;
 private:
-    ParagraphProperty* property;
-    std::vector<Run*> runs;
+    std::shared_ptr<ParagraphProperty> property;
+    std::vector<std::shared_ptr<Run>> runs;
 };
 }
 

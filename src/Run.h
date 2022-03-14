@@ -16,8 +16,8 @@
 namespace wordKit {
 class Text: Encodable {
 public:
-    Text(std::string);
-    ~Text();
+    explicit Text(std::string);
+    ~Text() override;
     std::string encode() noexcept override;
 private:
     std::string text;
@@ -25,18 +25,17 @@ private:
 // TODO: change on run childrens or another
 class Break: public Text {
 public:
-    Break() : Text("") {
-    }
-    ~Break() {}
+    Break() : Text("") { }
+    ~Break() override = default;
     
-    std::string encode() noexcept {
+    std::string encode() noexcept override {
         return "<w:br/>";
     }
 };
 
 class RunProperty: Encodable {
 public:
-    std::string font = "<w:rFonts w:ascii=\"Times New Roman\" w:hAnsi=\"Times New Roman\" w:cs=\"Times New Roman\" w:eatAsia=\"Times New Roman\"/>";
+    std::string font = R"(<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman" w:eatAsia="Times New Roman"/>)";
     
     bool isBold = false;
     
@@ -61,19 +60,20 @@ public:
     int size = 0;
     
     RunProperty();
-    ~RunProperty();
+    ~RunProperty() override;
     
     std::string encode() noexcept override;
 };
 
 class Run: Encodable {
 public:
-    Run(RunProperty*, const std::vector<Text*>);
-    ~Run();
+    Run(std::shared_ptr<RunProperty>, const std::vector<Text*>&);
+    Run(std::shared_ptr<RunProperty>, std::vector<std::shared_ptr<Text>>);
+    ~Run() override;
     std::string encode() noexcept override;
 private:
-    RunProperty* property;
-    std::vector<Text*> texts;
+    std::shared_ptr<RunProperty> property;
+    std::vector<std::shared_ptr<Text>> texts;
 };
 }
 

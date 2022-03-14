@@ -40,7 +40,7 @@ public:
      
      If pct or auto is specified, the value is ignored.
      */
-    bool isFixedLayut = true;
+    bool isFixedLayout = true;
     
     int width = 0;
     
@@ -82,13 +82,13 @@ public:
 
 class TableCell: Encodable {
 public:
-    TableCell(TableCellProperty*, Paragraph*);
+    TableCell(std::shared_ptr<TableCellProperty>, std::shared_ptr<Paragraph>);
     ~TableCell() override;
     std::string encode() noexcept override;
     
 private:
-    TableCellProperty* property;
-    Paragraph* paragraph;
+    std::shared_ptr<TableCellProperty> property;
+    std::shared_ptr<Paragraph> paragraph;
 };
 
 enum TableRowHeightRule {
@@ -104,7 +104,6 @@ std::string TableRowHeightRuleEncode(TableRowHeightRule tableRowHeightRule);
 
 class TableRowProperty: Encodable {
 public:
-    
     TableRowHeightRule heightRule = HRAtLeast;
     int height = 0;
     
@@ -114,23 +113,23 @@ public:
 
 class TableRow: Encodable {
 public:
-    TableRow(TableRowProperty*, std::vector<TableCell*>);
+    TableRow(std::shared_ptr<TableRowProperty>, std::vector<std::shared_ptr<TableCell>>);
     ~TableRow() override;
     std::string encode() noexcept override;
 private:
-    TableRowProperty* property;
-    std::vector<TableCell*> cells;
+    std::shared_ptr<TableRowProperty> property;
+    std::vector<std::shared_ptr<TableCell>> cells;
 };
 
 class Table: public Element {
 public:
-    Table(TableProperty*, TableGrid*, std::vector<TableRow*>);
+    Table(std::shared_ptr<TableProperty>, std::shared_ptr<TableGrid>, std::vector<std::shared_ptr<TableRow>>);
     ~Table() override;
     std::string encode() noexcept override;
 private:
-    TableProperty* property;
-    TableGrid* grid;
-    std::vector<TableRow*> rows;
+    std::shared_ptr<TableProperty> property;
+    std::shared_ptr<TableGrid> grid;
+    std::vector<std::shared_ptr<TableRow>> rows;
 };
 }
 #endif /* Table_hpp */

@@ -6,12 +6,14 @@
 
 #include "Run.h"
 
-wordKit::Text::Text(std::string text): text(text) {
-//    this->text = text;
+#include <iostream>
+#include <utility>
+
+wordKit::Text::Text(std::string text): text(std::move(text)) {
+
 }
 
-wordKit::Text::~Text() {
-}
+wordKit::Text::~Text() = default;
 
 std::string wordKit::Text::encode() noexcept {
     const std::string openKey = "<w:t>";
@@ -19,16 +21,12 @@ std::string wordKit::Text::encode() noexcept {
     return openKey + this->text + closeKey;
 }
 
-wordKit::RunProperty::RunProperty() {
-    
-}
+wordKit::RunProperty::RunProperty() = default;
 
-wordKit::RunProperty::~RunProperty() {
-    
-}
+wordKit::RunProperty::~RunProperty() = default;
 
 std::string wordKit::RunProperty::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
     if(!font.empty()) {
         content += font;
@@ -66,29 +64,28 @@ std::string wordKit::RunProperty::encode() noexcept {
     return openKey + content + closeKey;
 }
 
-wordKit::Run::Run(wordKit::RunProperty* _property, const std::vector<Text*> _texts): property(_property), texts(_texts) {
-    
+wordKit::Run::Run(std::shared_ptr<wordKit::RunProperty> _property, std::vector<std::shared_ptr<Text>> _texts): property(std::move(_property)), texts(std::move(_texts)) {
+
 }
 
-wordKit::Run::~Run() {
-    delete this->property;
-    
-    for(auto text : texts)
-        delete text;
-    
-    texts.clear();
+wordKit::Run::Run(std::shared_ptr<wordKit::RunProperty> _property, const std::vector<Text*>& _texts): property(std::move(_property)), texts({}) {
+    for (auto text: _texts) {
+        this->texts.push_back(std::shared_ptr<Text>(text));
+    }
 }
+
+wordKit::Run::~Run() = default;
 
 std::string wordKit::Run::encode() noexcept {
-    std::string content = "";
+    std::string content;
     
-    for(auto text : texts) {
+    for(const auto& text : texts) {
         content += text->encode();
     }
     
-    const std::string property = this->property->encode();
+    const std::string propertyEncoded = this->property->encode();
     const std::string openKey = "<w:r>";
     const std::string closeKey = "</w:r>";
-    const std::string run = openKey + property + content + closeKey;
+    std::string run = openKey + propertyEncoded + content + closeKey;
     return run;
 }

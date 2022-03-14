@@ -9,17 +9,6 @@
 
 #include <string>
 
-
-//class NewVAlignment {
-//public:
-//    static const NewVAlignment Top;
-//    static const NewVAlignment Center;
-//    static const NewVAlignment Bottom;
-//
-//    const std::string rawValue;
-//    NewVAlignment(std::string _rawValue);
-//};
-
 namespace wordKit {
 
 template<typename FUNCTION>

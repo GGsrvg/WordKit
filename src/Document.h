@@ -69,8 +69,10 @@ public:
     /**
      Append new elements to body
      */
-    void appendElements(std::vector<Element*> elements) noexcept;
-    
+    void appendElements(std::vector<std::shared_ptr<Element>>) noexcept;
+
+    void appendElements(const std::vector<Element*>&) noexcept;
+
     /**
      Save on disk
      */
@@ -78,7 +80,7 @@ public:
 private:
     struct zip_t *zip;
     std::string name;
-    std::vector<Element*> elements;
+    std::vector<std::shared_ptr<Element>> elements;
 };
 }
 

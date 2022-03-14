@@ -23,7 +23,7 @@ std::string wordKit::VAlignmentEncode(wordKit::VAlignment verticalAlignment) {
 }
 
 std::string wordKit::HAlignmentEncode(wordKit::HAlignment horizontalTextAlignment) {
-    std::string hAlignment = "";
+    std::string hAlignment;
     switch (horizontalTextAlignment) {
         case wordKit::HAStart:
             hAlignment = "left";
