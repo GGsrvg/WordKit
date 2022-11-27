@@ -2,7 +2,7 @@
 // Created by GGsrvg on 08.03.2022.
 //
 
-#include "SectionProperty.h"
+#include <WordKit/SectionProperty.h>
 
 wordKit::SectionProperty::SectionProperty() = default;
 

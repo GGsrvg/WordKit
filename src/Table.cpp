@@ -4,7 +4,7 @@
 //  Created by GGsrvg on 12.12.2021.
 //
 
-#include "Table.h"
+#include <WordKit/Table.h>
 
 wordKit::TableProperty::TableProperty() {
     
@@ -191,8 +191,11 @@ std::string wordKit::TableRow::encode() noexcept {
 }
 
 
-wordKit::Table::Table(std::shared_ptr<TableProperty> _property, std::shared_ptr<TableGrid> _grid, std::vector<std::shared_ptr<TableRow>> _rows):
-property(std::move(_property)), grid(std::move(_grid)), rows(std::move(_rows)) {
+wordKit::Table::Table(
+    std::shared_ptr<TableProperty> _property, 
+    std::shared_ptr<TableGrid> _grid, 
+    std::vector<std::shared_ptr<TableRow>> _rows
+): property(std::move(_property)), grid(std::move(_grid)), rows(std::move(_rows)) {
     
 }
 

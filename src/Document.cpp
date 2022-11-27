@@ -4,7 +4,7 @@
 //  Created by GGsrvg on 02.12.2021.
 //
 
-#include "Document.h"
+#include <WordKit/Document.h>
 
 #include <utility>
 
@@ -19,8 +19,7 @@ void createNewDocx(const std::string& fileName) {
     
     std::basic_string<uint8_t> bytes;
 
-    for (size_t i = 0; i < hex.length(); i += 2)
-    {
+    for (size_t i = 0; i < hex.length(); i += 2) {
         uint16_t byte;
         std::string nextByte = hex.substr(i, 2);
         std::istringstream(nextByte) >> std::hex >> byte;
@@ -30,18 +29,18 @@ void createNewDocx(const std::string& fileName) {
     std::string result(begin(bytes), end(bytes));
     
     std::ofstream output_file(fileName.c_str(), std::ios::binary | std::ios::out);
-    if (output_file.is_open())
-    {
+    if (output_file.is_open()) {
         output_file << result;
         output_file.close();
-    }
-    else
-    {
+    } else {
         std::cout << "Error could not create file." << std::endl;
     }
 }
 
-wordKit::Document::Document(const std::string& path, const std::string& name, std::shared_ptr<SectionProperty> sectionProperty) : property(std::move(sectionProperty)) {
+wordKit::Document::Document(
+    const std::string& path,
+    const std::string& name, 
+    std::shared_ptr<SectionProperty> sectionProperty) : property(std::move(sectionProperty)) {
     auto fileName = path;
     // check last char
     if (path.length() > 0 && path.back() != '/') {
@@ -54,8 +53,10 @@ wordKit::Document::Document(const std::string& path, const std::string& name, st
     this->zip = zip_open(fileName.c_str(), 0, 'a');
 }
 
-wordKit::Document::Document(const std::string& path, const std::string& name) :
-        wordKit::Document::Document(path, name, std::make_shared<SectionProperty>()) {
+wordKit::Document::Document(
+    const std::string& path, 
+    const std::string& name
+) : wordKit::Document::Document(path, name, std::make_shared<SectionProperty>()) {
 }
 
 wordKit::Document::~Document()  {

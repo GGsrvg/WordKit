@@ -4,7 +4,7 @@
 //  Created by GGsrvg on 05.12.2021.
 //
 
-#include "Paragraph.h"
+#include <WordKit/Paragraph.h>
 
 #include <utility>
 

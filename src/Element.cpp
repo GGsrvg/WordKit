@@ -4,7 +4,7 @@
 //  Created by GGsrvg on 25.12.2021.
 //
 
-#include "Element.h"
+#include <WordKit/Element.h>
 
 
 std::string wordKit::VAlignmentEncode(wordKit::VAlignment verticalAlignment) {

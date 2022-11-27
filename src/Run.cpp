@@ -4,7 +4,7 @@
 //  Created by GGsrvg on 05.12.2021.
 //
 
-#include "Run.h"
+#include <WordKit/Run.h>
 
 #include <iostream>
 #include <utility>
