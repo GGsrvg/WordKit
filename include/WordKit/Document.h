@@ -4,8 +4,7 @@
 //  Created by GGsrvg on 02.12.2021.
 //
 
-#ifndef Document_h
-#define Document_h
+#pragma once
 // standards
 #include <iostream>
 #include <cstdio>
@@ -83,5 +82,3 @@ private:
     std::vector<std::shared_ptr<Element>> elements;
 };
 }
-
-#endif /* Document_h */

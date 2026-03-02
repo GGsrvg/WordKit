@@ -4,8 +4,7 @@
 //  Created by GGsrvg on 02.12.2021.
 //
 
-#ifndef Paragraph_h
-#define Paragraph_h
+#pragma once
 
 #include <string>
 #include <vector>
@@ -36,5 +35,3 @@ private:
     std::vector<std::shared_ptr<Run>> runs;
 };
 }
-
-#endif /* Paragraph_h */

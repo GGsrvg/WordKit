@@ -4,8 +4,7 @@
 //  Created by GGsrvg on 02.12.2021.
 //
 
-#ifndef Run_h
-#define Run_h
+#pragma once
 
 #include <string>
 #include <vector>
@@ -76,5 +75,3 @@ private:
     std::vector<std::shared_ptr<Text>> texts;
 };
 }
-
-#endif /* Run_h */

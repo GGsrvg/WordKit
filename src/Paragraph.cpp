@@ -6,8 +6,6 @@
 
 #include <WordKit/Paragraph.h>
 
-#include <utility>
-
 wordKit::ParagraphProperty::ParagraphProperty() = default;
 
 wordKit::ParagraphProperty::~ParagraphProperty() = default;

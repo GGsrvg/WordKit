@@ -1,5 +1,5 @@
 #include <memory>
-#include "Document.h"
+#include "WordKit/WordKit.h"
 
 using namespace std;
 using namespace wordKit;

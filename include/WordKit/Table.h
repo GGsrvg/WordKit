@@ -4,8 +4,7 @@
 //  Created by GGsrvg on 12.12.2021.
 //
 
-#ifndef Table_hpp
-#define Table_hpp
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -132,4 +131,3 @@ private:
     std::vector<std::shared_ptr<TableRow>> rows;
 };
 }
-#endif /* Table_hpp */

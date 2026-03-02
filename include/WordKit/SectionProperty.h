@@ -2,9 +2,7 @@
 // Created by GGsrvg on 08.03.2022.
 //
 
-#ifndef SectionProperty_h
-#define SectionProperty_h
-
+#pragma once
 
 #include "Element.h"
 
@@ -49,5 +47,3 @@ public:
     std::string encode() noexcept override;
 };
 }
-
-#endif /* SectionProperty_h */

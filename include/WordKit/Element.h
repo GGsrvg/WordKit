@@ -4,10 +4,10 @@
 //  Created by GGsrvg on 02.12.2021.
 //
 
-#ifndef Element_h
-#define Element_h
+#pragma once
 
 #include <string>
+#include <memory>
 
 namespace wordKit {
 
@@ -48,7 +48,7 @@ std::string HAlignmentEncode(HAlignment horizontalAlignment);
 /**
  Every object inherits from Encodable
  */
-class Encodable {
+class Encodable: public std::enable_shared_from_this<Encodable> {
 public:
     virtual std::string encode() noexcept {
         return "ERROR";
@@ -63,4 +63,3 @@ public:
 };
 }
 
-#endif /* Element_h */
